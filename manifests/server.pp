@@ -104,6 +104,13 @@ class postfix::server (
     restart   => $service_restart,
   }
 
+  file { '/etc/postfix':
+    ensure  => directory,
+    owner   => '0',
+    group   => '0',
+    mode    => '0755',
+  }
+
   file { '/etc/postfix/master.cf':
     content => template("postfix/master.cf${filesuffix}.erb"),
     notify  => Service['postfix'],
